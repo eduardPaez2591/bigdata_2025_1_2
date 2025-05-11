@@ -11,6 +11,5 @@ setup(
         "openpyxl",
         "requests",
         "yf",
-        "sqlite3"
     ]
 )
