@@ -9,7 +9,7 @@ def cargar_csv_a_sqlite():
 
         # Verificar existencia del archivo CSV
         if not os.path.exists(ruta_csv):
-            print(f"❌ Archivo CSV no encontrado en: {ruta_csv}")
+            print(f" Archivo CSV no encontrado en: {ruta_csv}")
             return
 
         # Leer el archivo CSV
@@ -18,7 +18,7 @@ def cargar_csv_a_sqlite():
         # Verificar si columnas necesarias existen
         columnas_esperadas = ['fecha', 'cerrar', 'alto', 'bajo', 'abrir', 'volumen']
         if not all(col in df.columns for col in columnas_esperadas):
-            print("❌ El archivo CSV no contiene las columnas necesarias.")
+            print(" El archivo CSV no contiene las columnas necesarias.")
             print("Columnas encontradas:", df.columns.tolist())
             return
 
@@ -37,10 +37,10 @@ def cargar_csv_a_sqlite():
         df.to_sql('historico_dolar', conn, if_exists='replace', index=False)
         conn.close()
 
-        print(f"✅ Base de datos creada exitosamente en: {ruta_db}")
+        print(f" Base de datos creada exitosamente en: {ruta_db}")
     
     except Exception as e:
-        print("❌ Error durante la carga del CSV a SQLite:")
+        print(" Error durante la carga del CSV a SQLite:")
         print(e)
 
 #mostrar que la bd se creo 
@@ -48,7 +48,7 @@ def mostrar_info_db():
     ruta_db = os.path.join('src', 'edu_bigdata', 'static', 'db', 'historico_dolar.db')
 
     if not os.path.exists(ruta_db):
-        print("❌ El archivo de base de datos no existe.")
+        print(" El archivo de base de datos no existe.")
         return
 
     try:
@@ -58,23 +58,23 @@ def mostrar_info_db():
         # Mostrar tablas existentes
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
         tablas = cursor.fetchall()
-        print("📄 Tablas en la base de datos:")
+        print(" Tablas en la base de datos:")
         for t in tablas:
             print("   -", t[0])
 
         # Mostrar los primeros 5 registros de la tabla principal
         if ('historico_dolar',) in tablas:
-            print("\n🔍 Primeros registros de 'historico_dolar':")
+            print("\n Primeros registros de 'historico_dolar':")
             cursor.execute("SELECT * FROM historico_dolar LIMIT 5;")
             for fila in cursor.fetchall():
                 print(fila)
         else:
-            print("⚠️ No se encontró la tabla 'historico_dolar'.")
+            print(" No se encontró la tabla 'historico_dolar'.")
 
         conn.close()
 
     except Exception as e:
-        print("❌ Error al acceder a la base de datos:", e)
+        print(" Error al acceder a la base de datos:", e)
 
 
 
