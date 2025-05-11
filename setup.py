@@ -11,7 +11,6 @@ setup(
         "openpyxl",
         "requests",
         "yfinance",
-        "sqlite3",
         "BeautifulSoup4"
     ]
 )
